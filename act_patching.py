@@ -62,7 +62,7 @@ except:
 
 logit_effect = []
 with torch.no_grad():
-  for layer_index in trange(1):
+  for layer_index in trange(gemma2b.config.num_hidden_layers):
     logit_effect.append([])
     for pos_idx in trange(clean_tokens.size(-1), leave=False):
       for comp_type in ["post_attention_layernorm", "post_feedforward_layernorm"]:
@@ -82,4 +82,4 @@ with torch.no_grad():
         del final_diff
 
 logit_effect = torch.Tensor([[i.value for i in pos] for pos in logit_effect])
-torch.save(logit_effect, "./patching_res.pt")
+torch.save(logit_effect, "./cached_tensors/patching_res.pt")
