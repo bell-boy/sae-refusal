@@ -1,4 +1,6 @@
 /venv
+/data
+/*.egg-info
 .env
 gitsetup.sh
 nohup.out
